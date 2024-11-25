@@ -1,16 +1,27 @@
+import 'dart:io';
+
 int maxNumber(int num1, int num2, int num3) {
-  if (num1 >= num2 && num1 >= num3) {
-    return num1;  
-  } else if (num2 >= num1 && num2 >= num3) {
-    return num2;  
-  } else {
-    return num3;  
-  }
+
+  return (num1 >= num2 && num1 >= num3) ? num1 : (num2 >= num3 ? num2 : num3);
 }
 
 void main() {
+ 
+  print('กรุณากรอกตัวเลขตัวที่ 1:');
+  int? num1 = int.tryParse(stdin.readLineSync()!);
 
-  int result = maxNumber(5, 25, 20);
+  print('กรุณากรอกตัวเลขตัวที่ 2:');
+  int? num2 = int.tryParse(stdin.readLineSync()!);
 
-  print('The maximum number is: $result');
+  print('กรุณากรอกตัวเลขตัวที่ 3:');
+  int? num3 = int.tryParse(stdin.readLineSync()!);
+
+  if (num1 == null || num2 == null || num3 == null) {
+    print('กรุณากรอกตัวเลขที่ถูกต้อง');
+    return;
+  }
+
+  int result = maxNumber(num1, num2, num3);
+
+  print('ตัวเลขที่มากที่สุดคือ: $result');
 }

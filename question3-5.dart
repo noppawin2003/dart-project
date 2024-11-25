@@ -1,13 +1,13 @@
+import 'dart:io';
 import 'dart:math';
 
 String generateRandomPassword(int length) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  Random rand = Random();
-
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&*()_+-=[]{}|;:,.<>?';
+  Random random = Random();
   StringBuffer password = StringBuffer();
-  
+
   for (int i = 0; i < length; i++) {
-    int index = rand.nextInt(characters.length);  
+    int index = random.nextInt(characters.length);
     password.write(characters[index]);
   }
 
@@ -15,7 +15,17 @@ String generateRandomPassword(int length) {
 }
 
 void main() {
-  int passwordLength = 6; 
-  String randomPassword = generateRandomPassword(passwordLength);
-  print('Your generated password is: $randomPassword');
+  print('กรุณากรอกความยาวของรหัสผ่าน:');
+  int? length = int.tryParse(stdin.readLineSync()!);
+
+  if (length == null || length <= 0) {
+    print('กรุณากรอกค่าความยาวเป็นตัวเลขบวก');
+    return;
+  }
+
+
+  String password = generateRandomPassword(length);
+
+
+  print('รหัสผ่านที่สร้างขึ้น: $password');
 }
